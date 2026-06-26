@@ -2,6 +2,7 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { createApp } from './commands/create-app';
+import { createController } from './commands/create-controller';
 
 const program = new Command();
 
@@ -18,6 +19,7 @@ ${chalk.bold.cyan('╚═══════════════════�
 ${chalk.bold('Exemples :')}
   ${chalk.cyan('$ cleanpress create-app mon-api')}       Crée une app nommée mon-api
   ${chalk.cyan('$ cleanpress create-app my-project')}    Crée une app nommée my-project
+  ${chalk.cyan('$ cleanpress create-controller users CreateUser')} Crée une route et son controller
 
 ${chalk.bold('Structure générée :')}
   ${chalk.gray('mon-api/')}
@@ -39,6 +41,13 @@ program
   .description('Crée une nouvelle application Express avec Clean Architecture')
   .action(async (name: string) => {
     await createApp(name);
+  });
+
+program
+  .command('create-controller <routeName> <controllerName>')
+  .description('Crée une route Express et le controller associé')
+  .action(async (routeName: string, controllerName: string) => {
+    await createController(routeName, controllerName);
   });
 
 program.parse(process.argv);

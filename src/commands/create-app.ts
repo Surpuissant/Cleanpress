@@ -75,6 +75,7 @@ function createCleanArchitecture(targetDir: string, appName: string): void {
     'src/domain/repositories',
     'src/application/use-cases',
     'src/application/dtos',
+    'src/infrastructure/http/controllers',
     'src/infrastructure/http/routes',
     'src/infrastructure/http/middlewares',
     'src/infrastructure/repositories',
