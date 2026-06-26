@@ -32,7 +32,7 @@ ${chalk.bold('Structure générée :')}
   ${chalk.gray('│   ├── application/     ← use cases, dtos')}
   ${chalk.gray('│   ├── modules/         ← controllers, routes')}
   ${chalk.gray('│   ├── infrastructure/  ← DB, implémentations')}
-  ${chalk.gray('│   └── main.ts          ← point d\\'entrée')}
+  ${chalk.gray('│   └── main.ts          ← point d\'entrée')}
   ${chalk.gray('├── tsconfig.json')}
   ${chalk.gray('├── .eslintrc.json')}
   ${chalk.gray('└── AGENTS.md')}
