@@ -143,4 +143,10 @@ app.listen(PORT, () => {
 });
 `
   );
+
+  // Fichier modules.ts
+  fs.writeFileSync(
+    path.join(targetDir, 'src/modules.ts'),
+    `export const modules = [];\n`
+  );
 }
