@@ -26,7 +26,8 @@ ${chalk.bold('Structure générée :')}
   ${chalk.gray('├── src/')}
   ${chalk.gray('│   ├── domain/          ← entités, interfaces')}
   ${chalk.gray('│   ├── application/     ← use cases, dtos')}
-  ${chalk.gray('│   ├── infrastructure/  ← routes Express, DB')}
+  ${chalk.gray('│   ├── modules/         ← controllers, routes')}
+  ${chalk.gray('│   ├── infrastructure/  ← DB, implémentations')}
   ${chalk.gray('│   └── main.ts          ← point d\'entrée')}
   ${chalk.gray('├── tsconfig.json')}
   ${chalk.gray('├── .eslintrc.json')}
