@@ -1,13 +1,38 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
+import chalk from 'chalk';
 import { createApp } from './commands/create-app';
 
 const program = new Command();
 
 program
   .name('cleanpress')
-  .description('CLI pour créer des apps Express avec Clean Architecture')
-  .version('1.0.0');
+  .description(chalk.cyan('CLI pour créer des apps Express avec Clean Architecture'))
+  .version('1.0.0')
+  .addHelpText('before', `
+${chalk.bold.cyan('╔══════════════════════════════════════╗')}
+${chalk.bold.cyan('║')}        ${chalk.bold.white('CleanPress CLI  v1.0.0')}        ${chalk.bold.cyan('║')}
+${chalk.bold.cyan('╚══════════════════════════════════════╝')}
+`)
+  .addHelpText('after', `
+${chalk.bold('Exemples :')}
+  ${chalk.cyan('$ cleanpress create-app mon-api')}       Crée une app nommée mon-api
+  ${chalk.cyan('$ cleanpress create-app my-project')}    Crée une app nommée my-project
+
+${chalk.bold('Structure générée :')}
+  ${chalk.gray('mon-api/')}
+  ${chalk.gray('├── src/')}
+  ${chalk.gray('│   ├── domain/          ← entités, interfaces')}
+  ${chalk.gray('│   ├── application/     ← use cases, dtos')}
+  ${chalk.gray('│   ├── infrastructure/  ← routes Express, DB')}
+  ${chalk.gray('│   └── main.ts          ← point d\'entrée')}
+  ${chalk.gray('├── tsconfig.json')}
+  ${chalk.gray('├── .eslintrc.json')}
+  ${chalk.gray('└── AGENTS.md')}
+
+${chalk.bold('Après création :')}
+  ${chalk.cyan('$ cd mon-api && npm run dev')}
+`);
 
 program
   .command('create-app <name>')
