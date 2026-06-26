@@ -3,6 +3,7 @@ import { Command } from "commander";
 import chalk from "chalk";
 import { createApp } from "./commands/create-app";
 import { createModule } from "./commands/create-module";
+import { createUseCaseCommand } from './commands/create-use-case';
 
 const program = new Command();
 
@@ -67,5 +68,13 @@ program
   .action(async (name: string) => {
     await createModule(name);
   });
+
+program
+  .command("create-use-case <module> <name>")
+  .description("Crée un Use Case + DTOs dans un module")
+  .action(async (module: string, name: string) => {
+    await createUseCaseCommand(module, name);
+  });
+
 
 program.parse(process.argv);
