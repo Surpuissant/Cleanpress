@@ -3,6 +3,7 @@ import * as path from 'path';
 import { execSync } from 'child_process';
 import chalk from 'chalk';
 import ora from 'ora';
+import { buildDefineRoutesTemplate } from '../templates/define-routes';
 
 export async function createApp(name: string): Promise<void> {
   const targetDir = path.resolve(process.cwd(), name);
@@ -75,8 +76,8 @@ function createCleanArchitecture(targetDir: string, appName: string): void {
     'src/domain/repositories',
     'src/application/use-cases',
     'src/application/dtos',
-    'src/infrastructure/http/routes',
-    'src/infrastructure/http/middlewares',
+    'src/modules',
+    'src/shared/presentation',
     'src/infrastructure/repositories',
   ];
 
@@ -95,12 +96,15 @@ Ce projet suit la **Clean Architecture**. Respecte strictement la séparation de
 
 - \`src/domain/\` — entités et interfaces (aucune dépendance externe)
 - \`src/application/\` — use cases (dépend uniquement du domain)
-- \`src/infrastructure/\` — implémentations concrètes, routes Express, accès DB
+- \`src/modules/\` — modules métier, controllers et routes de présentation
+- \`src/shared/\` — helpers partagés entre modules
+- \`src/infrastructure/\` — implémentations concrètes et accès DB
 - \`src/main.ts\` — point d'entrée, composition root
 
 ## Règles
 - Ne jamais importer \`infrastructure\` depuis \`domain\` ou \`application\`
 - Les use cases ne connaissent pas Express (pas de \`req\`, \`res\`)
+- Les controllers et routes Express restent dans \`src/modules/<module>/presentation\`
 - Toujours typer explicitement avec TypeScript, pas de \`any\`
 - Lancer \`npm run lint\` avant de proposer du code
 
@@ -112,6 +116,13 @@ npm run lint   # vérifier le code
 \`\`\`
 `
   );
+
+  // Helper de routes déclaratives
+  fs.writeFileSync(
+    path.join(targetDir, 'src/shared/presentation/defineRoutes.ts'),
+    buildDefineRoutesTemplate()
+  );
+  fs.removeSync(path.join(targetDir, 'src/shared/presentation/.gitkeep'));
 
   // Fichier main.ts
   fs.writeFileSync(
