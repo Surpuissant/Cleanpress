@@ -35,6 +35,13 @@ ${chalk.bold('Après création :')}
 `);
 
 program
+  .command('version')
+  .description('Affiche la version de CleanPress')
+  .action(() => {
+    console.log(`\n${chalk.bold.cyan('CleanPress')} ${chalk.white('v1.0.0')}\n`);
+  });
+
+program
   .command('create-app <name>')
   .description('Crée une nouvelle application Express avec Clean Architecture')
   .action(async (name: string) => {
