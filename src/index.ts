@@ -2,6 +2,7 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { createApp } from './commands/create-app';
+import { createUseCaseCommand } from './commands/create-use-case';
 
 const program = new Command();
 
@@ -46,6 +47,13 @@ program
   .description('Crée une nouvelle application Express avec Clean Architecture')
   .action(async (name: string) => {
     await createApp(name);
+  });
+
+program
+  .command("create-use-case <module> <name>")
+  .description("Crée un Use Case + DTOs dans un module")
+  .action(async (module: string, name: string) => {
+    await createUseCaseCommand(module, name);
   });
 
 program.parse(process.argv);
